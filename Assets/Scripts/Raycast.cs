@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Raycast_New : MonoBehaviour
+public class Raycast : MonoBehaviour
 {
     //[SerializeField] public LayerMask layermask;
     [SerializeField] public float maxDistance;
-    public PhoneController_New voicebox;
+    public PhoneController voicebox;
     Mouse mouse = Mouse.current;
     int PhoneFlag = 0;
+    [SerializeField] GameObject fake;
+    [SerializeField] GameObject real;
     void Awake()
     {
-        voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController_New>();
+        voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController>();
     }
     void Update()
     {
@@ -37,6 +39,11 @@ public class Raycast_New : MonoBehaviour
                     PhoneFlag = 0;
                 }
                 
+            }
+            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Flashlight"))
+            {
+                fake.SetActive(false);
+                real.SetActive(true);
             }
         }
         

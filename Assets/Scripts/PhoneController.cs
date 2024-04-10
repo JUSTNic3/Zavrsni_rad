@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhoneController_New : MonoBehaviour
+public class PhoneController : MonoBehaviour
 {
     public AudioSource ringing;
     public AudioSource recording;
