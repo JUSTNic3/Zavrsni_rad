@@ -7,8 +7,13 @@ public class Raycast_New : MonoBehaviour
 {
     //[SerializeField] public LayerMask layermask;
     [SerializeField] public float maxDistance;
-    [SerializeField] private string ObjectTag;
+    public PhoneController_New voicebox;
     Mouse mouse = Mouse.current;
+    int PhoneFlag = 0;
+    void Awake()
+    {
+        voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController_New>();
+    }
     void Update()
     {
         RaycastHit hit;
@@ -18,9 +23,20 @@ public class Raycast_New : MonoBehaviour
 
         if (mouse.leftButton.wasPressedThisFrame)
         {
-            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag(ObjectTag))
+            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Phone"))
             {
-                print("We have ingnition");
+                if(PhoneFlag == 0)
+                {
+                    voicebox.ringing.Stop();
+                    voicebox.recording.Play();
+                    PhoneFlag = 1;
+                }
+                else
+                {
+                    voicebox.recording.Stop();
+                    PhoneFlag = 0;
+                }
+                
             }
         }
         
