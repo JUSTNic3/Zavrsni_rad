@@ -6,8 +6,6 @@ TagManager:
   tags:
   - CinemachineTarget
   - Phone
-  - Flashlight
-  - Flashlight_New
   layers:
   - Default
   - TransparentFX

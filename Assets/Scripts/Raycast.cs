@@ -40,7 +40,7 @@ public class Raycast : MonoBehaviour
                 }
                 
             }
-            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Flashlight"))
+            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Untagged"))
             {
                 fake.SetActive(false);
                 real.SetActive(true);
