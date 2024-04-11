@@ -11,13 +11,14 @@ public class Flashlight : MonoBehaviour
         lightSource.SetActive(false);
     }
 
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-           {
-            Debug.Log("Button pressed");
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log("Pressed");
             lightSource.SetActive(true);
-           }
+        }
     }
 }
