@@ -8,6 +8,7 @@ public class Raycast : MonoBehaviour
     //[SerializeField] public LayerMask layermask;
     [SerializeField] public float maxDistance;
     public PhoneController voicebox;
+    public DoorControl door;
     Mouse mouse = Mouse.current;
     int PhoneFlag = 0;
     [SerializeField] GameObject fake;
@@ -44,6 +45,19 @@ public class Raycast : MonoBehaviour
             {
                 fake.SetActive(false);
                 real.SetActive(true);
+            }
+            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Door"))
+            {
+                if(door.DoorOpen)
+                {
+                    door.myDoor.Play("door_close", 0, 0.0f);
+                    door.DoorOpen = false;
+                }
+                else
+                {
+                    door.myDoor.Play("door_open", 0, 0.0f);
+                    door.DoorOpen = true;
+                }
             }
         }
         
