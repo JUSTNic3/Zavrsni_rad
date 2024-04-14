@@ -11,9 +11,13 @@ public class Raycast : MonoBehaviour
     public DoorControl door;
     public LightSwitch lampa;
     Mouse mouse = Mouse.current;
+    [SerializeField] AudioSource bangingOnDoor;
+    [SerializeField] GameObject BoomTrigger;
     int PhoneFlag = 0;
     [SerializeField] GameObject fake;
     [SerializeField] GameObject real;
+    [SerializeField] GameObject fakeDoor;
+    [SerializeField] GameObject brokenDoor;
     void Awake()
     {
         voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController>();
@@ -78,6 +82,10 @@ public class Raycast : MonoBehaviour
                 lampa.LeverUp.Play("lever_up", 0, 0.0f);
                 lampa.LeverDown = false;
                 lampa.lamp.SetActive(true);
+                bangingOnDoor.Play();
+                BoomTrigger.SetActive(true);
+                fakeDoor.SetActive(false);
+                brokenDoor.SetActive(true);
             }
         }
         
