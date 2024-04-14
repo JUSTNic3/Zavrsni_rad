@@ -9,6 +9,7 @@ public class Raycast : MonoBehaviour
     [SerializeField] public float maxDistance;
     public PhoneController voicebox;
     public DoorControl door;
+    public LightSwitch lampa;
     Mouse mouse = Mouse.current;
     int PhoneFlag = 0;
     [SerializeField] GameObject fake;
@@ -58,6 +59,25 @@ public class Raycast : MonoBehaviour
                     door.myDoor.Play("door_open", 0, 0.0f);
                     door.DoorOpen = true;
                 }
+            }
+            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Box"))
+            {
+                if(lampa.BoxDoorOpen)
+                {
+                    lampa.BoxDoor.Play("box_close", 0, 0.0f);
+                    lampa.BoxDoorOpen = false;
+                }
+                else
+                {
+                    lampa.BoxDoor.Play("box_open", 0, 0.0f);
+                    lampa.BoxDoorOpen = true;
+                }
+            }
+            if (Physics.Raycast(play, out hit, maxDistance) && lampa.BoxDoorOpen && hit.transform.CompareTag("Lever"))
+            {
+                lampa.LeverUp.Play("lever_up", 0, 0.0f);
+                lampa.LeverDown = false;
+                lampa.lamp.SetActive(true);
             }
         }
         

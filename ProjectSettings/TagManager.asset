@@ -6,8 +6,9 @@ TagManager:
   tags:
   - CinemachineTarget
   - Phone
-  - Flashlight_New
   - Door
+  - Box
+  - Lever
   layers:
   - Default
   - TransparentFX
