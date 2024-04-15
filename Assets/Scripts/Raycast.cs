@@ -7,7 +7,10 @@ public class Raycast : MonoBehaviour
 {
     //[SerializeField] public LayerMask layermask;
     [SerializeField] public float maxDistance;
+    public NotificationTriggerEvent notif;
+    private string notificationMessage = "Fix the lights.";
     public PhoneController voicebox;
+    [SerializeField] private GameObject lightsOff;
     public DoorControl door;
     public LightSwitch lampa;
     Mouse mouse = Mouse.current;
@@ -46,10 +49,11 @@ public class Raycast : MonoBehaviour
                 }
                 
             }
-            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Untagged"))
+            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Flash"))
             {
                 fake.SetActive(false);
                 real.SetActive(true);
+                lightsOff.SetActive(false);
             }
             if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Door"))
             {
@@ -81,7 +85,7 @@ public class Raycast : MonoBehaviour
             {
                 lampa.LeverUp.Play("lever_up", 0, 0.0f);
                 lampa.LeverDown = false;
-                lampa.lamp.SetActive(true);
+                lightsOff.SetActive(true);
                 bangingOnDoor.Play();
                 BoomTrigger.SetActive(true);
                 fakeDoor.SetActive(false);

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NottificationTriggerEvent : MonoBehaviour
+public class NotificationTriggerEvent : MonoBehaviour
 {
     [Header("UI Content")]
     [SerializeField] private Text notificationText;
     //[SerializeField] private Image
 
     [Header("Message Customization")]
-    [SerializeField] [TextArea] private string notifiactionMessage;
+    [SerializeField] [TextArea] private string notificationMessage;
 
     [Header("Notification Remowal")]
     [SerializeField] private bool removeAfterExit = false;
@@ -47,7 +47,7 @@ public class NottificationTriggerEvent : MonoBehaviour
     {
         objectCollider.enabled = false;
         notificationAnim.Play("NotificationFadeIn");
-        notificationText.text = notifiactionMessage;
+        notificationText.text = notificationMessage;
 
         if(disableAfterTimer)
         {
