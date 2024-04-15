@@ -10,6 +10,7 @@ public class Raycast : MonoBehaviour
     //public LightsNotification notif;
     public PhoneController voicebox;
     [SerializeField] private GameObject lightsOff;
+    [SerializeField] AudioSource powerOut;
     public DoorControl door;
     public LightSwitch lampa;
     Mouse mouse = Mouse.current;
@@ -55,6 +56,7 @@ public class Raycast : MonoBehaviour
                 fake.SetActive(false);
                 real.SetActive(true);
                 lightsOff.SetActive(false);
+                powerOut.Play();
             }
             if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Door"))
             {
@@ -96,11 +98,9 @@ public class Raycast : MonoBehaviour
             {
                 key.SetActive(false);
                 KeyCollected = true;
-                Debug.Log("Key collected");
             }
             if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("SecurityDoor") && KeyCollected)
             {
-                Debug.Log("Prepoznaje");
                 if (door.SecurityDoorOpen)
                 {
                     door.SecurityDoor.Play("security_door_close", 0, 0.0f);
