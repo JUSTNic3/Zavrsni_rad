@@ -6,27 +6,27 @@ using UnityEngine.UI;
 public class NotificationTriggerEvent : MonoBehaviour
 {
     [Header("UI Content")]
-    [SerializeField] private Text notificationText;
-    //[SerializeField] private Image
+    public Text notificationText;
 
     [Header("Message Customization")]
-    [SerializeField] [TextArea] private string notificationMessage;
+    [TextArea] public string notificationMessage;
 
     [Header("Notification Remowal")]
-    [SerializeField] private bool removeAfterExit = false;
-    [SerializeField] private bool disableAfterTimer = false;
-    [SerializeField] private float disableTimer =  1.0f;
+    public bool removeAfterExit = false;
+    public bool disableAfterTimer = false;
+    public float disableTimer =  1.0f;
 
     [Header("Notification Animation")]
-    [SerializeField] private Animator notificationAnim;
-    private BoxCollider objectCollider; 
+    public Animator notificationAnim;
+    public BoxCollider objectCollider;
+    
 
-    private void Awake() 
+    public void Awake() 
     {   
         objectCollider = gameObject.GetComponent<BoxCollider>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
@@ -35,7 +35,7 @@ public class NotificationTriggerEvent : MonoBehaviour
         }
     }
 
-       private void OnTriggerExit(Collider other)
+       public void OnTriggerExit(Collider other)
     {
         if(other.CompareTag("Player") && removeAfterExit)
         {
@@ -43,7 +43,7 @@ public class NotificationTriggerEvent : MonoBehaviour
         }
     }
 
-    IEnumerator EnableNotification()
+    public IEnumerator EnableNotification()
     {
         objectCollider.enabled = false;
         notificationAnim.Play("NotificationFadeIn");

@@ -7,8 +7,7 @@ public class Raycast : MonoBehaviour
 {
     //[SerializeField] public LayerMask layermask;
     [SerializeField] public float maxDistance;
-    public NotificationTriggerEvent notif;
-    private string notificationMessage = "Fix the lights.";
+    //public LightsNotification notif;
     public PhoneController voicebox;
     [SerializeField] private GameObject lightsOff;
     public DoorControl door;
@@ -21,6 +20,8 @@ public class Raycast : MonoBehaviour
     [SerializeField] GameObject real;
     [SerializeField] GameObject fakeDoor;
     [SerializeField] GameObject brokenDoor;
+    private bool KeyCollected = false;
+    [SerializeField] GameObject key;
     void Awake()
     {
         voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController>();
@@ -90,6 +91,26 @@ public class Raycast : MonoBehaviour
                 BoomTrigger.SetActive(true);
                 fakeDoor.SetActive(false);
                 brokenDoor.SetActive(true);
+            }
+            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Key"))
+            {
+                key.SetActive(false);
+                KeyCollected = true;
+                Debug.Log("Key collected");
+            }
+            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("SecurityDoor") && KeyCollected)
+            {
+                Debug.Log("Prepoznaje");
+                if (door.SecurityDoorOpen)
+                {
+                    door.SecurityDoor.Play("security_door_close", 0, 0.0f);
+                    door.SecurityDoorOpen = false;
+                }
+                else
+                {
+                    door.SecurityDoor.Play("security_door_open", 0, 0.0f);
+                    door.SecurityDoorOpen = true;
+                }
             }
         }
         

@@ -11,6 +11,8 @@ TagManager:
   - Lever
   - Unimportant
   - Flash
+  - SecurityDoor
+  - Key
   layers:
   - Default
   - TransparentFX
