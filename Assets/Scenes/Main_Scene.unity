@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: 619e305f5165a9946b7f72464e44ca4a, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.029087221, g: 0.029897578, b: 0.029896645, a: 1}
+  m_IndirectSpecularColor: {r: 0.029087227, g: 0.029897582, b: 0.029896658, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -25960,7 +25960,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 451b75f252ee11446bd237302ca81e6d, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -31603,7 +31603,8 @@ MonoBehaviour:
   door: {fileID: 60889539378096571}
   lampa: {fileID: 60889539378096572}
   bangingOnDoor: {fileID: 1789065927}
-  BoomTrigger: {fileID: 2070663330}
+  BoomTrigger: {fileID: 1284299720}
+  doorGoBoom: {fileID: 1284299722}
   fake: {fileID: 1147967144365624}
   real: {fileID: 1147966900981699}
   fakeDoor: {fileID: 11749824}
@@ -38768,7 +38769,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 3361ec9881573ac4a80536dfc0a08d1e, type: 3}
+  - {fileID: 2100000, guid: 42899e9f623723045ad4425cf04a8386, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

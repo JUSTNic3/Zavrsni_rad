@@ -15,7 +15,9 @@ public class Raycast : MonoBehaviour
     public LightSwitch lampa;
     Mouse mouse = Mouse.current;
     [SerializeField] AudioSource bangingOnDoor;
+    [SerializeField] bool HasDestroyed = false;
     [SerializeField] GameObject BoomTrigger;
+    [SerializeField] AudioSource doorGoBoom;
     int PhoneFlag = 0;
     [SerializeField] GameObject fake;
     [SerializeField] GameObject real;
@@ -86,13 +88,34 @@ public class Raycast : MonoBehaviour
             }
             if (Physics.Raycast(play, out hit, maxDistance) && lampa.BoxDoorOpen && hit.transform.CompareTag("Lever"))
             {
-                lampa.LeverUp.Play("lever_up", 0, 0.0f);
-                lampa.LeverDown = false;
-                lightsOff.SetActive(true);
-                bangingOnDoor.Play();
-                BoomTrigger.SetActive(true);
-                fakeDoor.SetActive(false);
-                brokenDoor.SetActive(true);
+                if(lampa.LeverDown)
+                {
+                    if (HasDestroyed)
+                    {
+                        lampa.LeverUp.Play("lever_up", 0, 0.0f);
+                        lampa.LeverDown = false;
+                        lightsOff.SetActive(true);
+                    }
+                    else
+                    {
+                        lampa.LeverUp.Play("lever_up", 0, 0.0f);
+                        lampa.LeverDown = false;
+                        lightsOff.SetActive(true);
+                        bangingOnDoor.Play();
+                        BoomTrigger.SetActive(true);
+                        fakeDoor.SetActive(false);
+                        brokenDoor.SetActive(true);
+                        HasDestroyed = true;
+                    }
+                }
+                else
+                {
+                    lampa.LeverUp.Play("lever_down", 0, 0.0f);
+                    lampa.LeverDown = true;
+                    lightsOff.SetActive(false);
+                    powerOut.Play();
+                }
+                
             }
             if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Key"))
             {
