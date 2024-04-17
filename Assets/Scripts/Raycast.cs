@@ -14,9 +14,9 @@ public class Raycast : MonoBehaviour
     public DoorControl door;
     public LightSwitch lampa;
     Mouse mouse = Mouse.current;
-    [SerializeField] AudioSource bangingOnDoor;
+    [SerializeField] AudioSource bangingOnDoorAndBoom;
     [SerializeField] bool HasDestroyed = false;
-    [SerializeField] GameObject BoomTrigger;
+    //[SerializeField] GameObject BoomTrigger;
     [SerializeField] AudioSource doorGoBoom;
     int PhoneFlag = 0;
     [SerializeField] GameObject fake;
@@ -101,8 +101,8 @@ public class Raycast : MonoBehaviour
                         lampa.LeverUp.Play("lever_up", 0, 0.0f);
                         lampa.LeverDown = false;
                         lightsOff.SetActive(true);
-                        bangingOnDoor.Play();
-                        BoomTrigger.SetActive(true);
+                        bangingOnDoorAndBoom.Play();
+                        //BoomTrigger.SetActive(true);
                         fakeDoor.SetActive(false);
                         brokenDoor.SetActive(true);
                         HasDestroyed = true;
