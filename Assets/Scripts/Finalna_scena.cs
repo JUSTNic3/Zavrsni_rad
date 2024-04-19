@@ -6,6 +6,8 @@ using System.Threading;
 public class Finalna_scena : MonoBehaviour
 {
     [SerializeField] GameObject little_shits;
+    [SerializeField] GameObject fakeDoor;
+    [SerializeField] GameObject realDoor;
     [SerializeField] BoxCollider scena_collider;
     [SerializeField] GameObject kamera;
     [SerializeField] GameObject ScreechCamera;
@@ -16,6 +18,8 @@ public class Finalna_scena : MonoBehaviour
     [SerializeField] AudioSource Eerie;
     [SerializeField] AudioSource Screech;
     [SerializeField] AudioSource CameraBreak;
+    [SerializeField] AudioSource Static;
+    public bool IsMad = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +36,8 @@ public class Finalna_scena : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            fakeDoor.SetActive(false);
+            realDoor.SetActive(true);
             little_shits.SetActive(true);
             Eerie.Play();
             Invoke("Screech_scene", 4);
@@ -52,5 +58,7 @@ public class Finalna_scena : MonoBehaviour
         error.SetActive(true);
         Greenlight.SetActive(false);
         RedLight.SetActive(true);
+        Static.Play();
+        IsMad = true;
     }
 }
