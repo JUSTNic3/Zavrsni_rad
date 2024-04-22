@@ -8,7 +8,7 @@ public class Finalna_scena : MonoBehaviour
     [SerializeField] GameObject little_shits;
     [SerializeField] GameObject fakeDoor;
     [SerializeField] GameObject realDoor;
-    [SerializeField] BoxCollider scena_collider;
+    //[SerializeField] BoxCollider scena_collider;
     [SerializeField] GameObject kamera;
     [SerializeField] GameObject ScreechCamera;
     [SerializeField] GameObject error;
@@ -32,16 +32,13 @@ public class Finalna_scena : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider other)
+    public void Pocetak_scene()
     {
-        if(other.CompareTag("Player"))
-        {
-            fakeDoor.SetActive(false);
-            realDoor.SetActive(true);
-            little_shits.SetActive(true);
-            Eerie.Play();
-            Invoke("Screech_scene", 4);
-        }
+        fakeDoor.SetActive(false);
+        realDoor.SetActive(true);
+        little_shits.SetActive(true);
+        Eerie.Play();
+        Invoke("Screech_scene", 4);
     }
     void Screech_scene()
     {

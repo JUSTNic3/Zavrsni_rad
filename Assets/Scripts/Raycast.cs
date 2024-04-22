@@ -16,8 +16,6 @@ public class Raycast : MonoBehaviour
     Mouse mouse = Mouse.current;
     [SerializeField] AudioSource bangingOnDoorAndBoom;
     [SerializeField] bool HasDestroyed = false;
-    //[SerializeField] GameObject BoomTrigger;
-    [SerializeField] AudioSource doorGoBoom;
     int PhoneFlag = 0;
     [SerializeField] GameObject fake;
     [SerializeField] GameObject real;
@@ -25,6 +23,9 @@ public class Raycast : MonoBehaviour
     [SerializeField] GameObject brokenDoor;
     private bool KeyCollected = false;
     [SerializeField] GameObject key;
+    public Finalna_scena jumpscare;
+    [SerializeField] Animator breakDoorAnim;
+    [SerializeField] bool DoorBrokenDown = false;
     void Awake()
     {
         voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController>();
@@ -34,7 +35,7 @@ public class Raycast : MonoBehaviour
         RaycastHit hit;
         Vector3 direction = Vector3.forward;
         Ray play = new Ray(transform.position, transform.TransformDirection(direction * maxDistance));
-        Debug.DrawRay(transform.position, transform.TransformDirection(direction * maxDistance), Color.red);
+        //Debug.DrawRay(transform.position, transform.TransformDirection(direction * maxDistance), Color.red);
 
         if (mouse.leftButton.wasPressedThisFrame)
         {
@@ -136,6 +137,22 @@ public class Raycast : MonoBehaviour
                 }
             }
         }
-        
+        if (Physics.Raycast(play, out hit, 11) && hit.transform.CompareTag("Camera"))
+        {
+            Debug.Log("Radi");
+            jumpscare.Pocetak_scene();
+        }
+        if (jumpscare.IsMad)
+        {
+            if (Physics.Raycast(play, out hit, 11) && hit.transform.CompareTag("BreakDownDoor"))
+            {
+                if (!DoorBrokenDown)
+                {
+                    breakDoorAnim.Play("door_breakdown", 0, 0.0f);
+                    Debug.Log("Vrata");
+                    DoorBrokenDown = true;
+                }
+            }
+        }
     }
 }
