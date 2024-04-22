@@ -26,6 +26,9 @@ public class Raycast : MonoBehaviour
     public Finalna_scena jumpscare;
     [SerializeField] Animator breakDoorAnim;
     [SerializeField] bool DoorBrokenDown = false;
+    [SerializeField] bool FinaleTrigger = false;
+    [SerializeField] GameObject replacement;
+    [SerializeField] InputActionReference disableScript;
     void Awake()
     {
         voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController>();
@@ -103,7 +106,6 @@ public class Raycast : MonoBehaviour
                         lampa.LeverDown = false;
                         lightsOff.SetActive(true);
                         bangingOnDoorAndBoom.Play();
-                        //BoomTrigger.SetActive(true);
                         fakeDoor.SetActive(false);
                         brokenDoor.SetActive(true);
                         HasDestroyed = true;
@@ -137,10 +139,13 @@ public class Raycast : MonoBehaviour
                 }
             }
         }
-        if (Physics.Raycast(play, out hit, 11) && hit.transform.CompareTag("Camera"))
+        if (Physics.Raycast(play, out hit, 2) && hit.transform.CompareTag("Camera"))
         {
-            Debug.Log("Radi");
-            jumpscare.Pocetak_scene();
+            if (!FinaleTrigger)
+            {
+                jumpscare.Pocetak_scene();
+                FinaleTrigger = true;
+            }
         }
         if (jumpscare.IsMad)
         {
@@ -149,7 +154,8 @@ public class Raycast : MonoBehaviour
                 if (!DoorBrokenDown)
                 {
                     breakDoorAnim.Play("door_breakdown", 0, 0.0f);
-                    Debug.Log("Vrata");
+                    replacement.SetActive(true);
+
                     DoorBrokenDown = true;
                 }
             }
