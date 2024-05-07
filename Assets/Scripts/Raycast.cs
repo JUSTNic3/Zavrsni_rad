@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Threading;
 
 public class Raycast : MonoBehaviour
 {
@@ -28,7 +29,8 @@ public class Raycast : MonoBehaviour
     [SerializeField] bool DoorBrokenDown = false;
     [SerializeField] bool FinaleTrigger = false;
     [SerializeField] GameObject replacement;
-    [SerializeField] InputActionReference disableScript;
+    [SerializeField] GameObject old_camera;
+    [SerializeField] AudioSource final_banging;
     void Awake()
     {
         voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController>();
@@ -149,16 +151,22 @@ public class Raycast : MonoBehaviour
         }
         if (jumpscare.IsMad)
         {
-            if (Physics.Raycast(play, out hit, 11) && hit.transform.CompareTag("BreakDownDoor"))
-            {
-                if (!DoorBrokenDown)
-                {
-                    breakDoorAnim.Play("door_breakdown", 0, 0.0f);
-                    replacement.SetActive(true);
-
-                    DoorBrokenDown = true;
-                }
-            }
+            Invoke("sound_breaking", 7);
+        }
+    }
+    void sound_breaking()
+    {
+        final_banging.Play();
+        Invoke("door_breaking", 5);
+    }
+    void door_breaking()
+    {
+        if (!DoorBrokenDown)
+        {
+            breakDoorAnim.Play("door_breakdown", 0, 0.0f);
+            replacement.SetActive(true);
+            old_camera.SetActive(false);
+            DoorBrokenDown = true;
         }
     }
 }
