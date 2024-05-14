@@ -8,8 +8,9 @@ public class Raycast : MonoBehaviour
 {
     //[SerializeField] public LayerMask layermask;
     [SerializeField] public float maxDistance;
-    //public LightsNotification notif;
     public PhoneController voicebox;
+    public GameObject light_notif;
+    public GameObject noise_notif;
     [SerializeField] private GameObject lightsOff;
     [SerializeField] AudioSource powerOut;
     public DoorControl door;
@@ -59,10 +60,11 @@ public class Raycast : MonoBehaviour
                 }
                 
             }
-            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Flash"))
+            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Untagged"))
             {
                 fake.SetActive(false);
                 real.SetActive(true);
+                light_notif.SetActive(true);
                 lightsOff.SetActive(false);
                 powerOut.Play();
             }
@@ -108,6 +110,7 @@ public class Raycast : MonoBehaviour
                         lampa.LeverDown = false;
                         lightsOff.SetActive(true);
                         bangingOnDoorAndBoom.Play();
+                        noise_notif.SetActive(true);
                         fakeDoor.SetActive(false);
                         brokenDoor.SetActive(true);
                         HasDestroyed = true;
