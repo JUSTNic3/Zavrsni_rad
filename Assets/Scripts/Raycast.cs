@@ -32,10 +32,12 @@ public class Raycast : MonoBehaviour
     [SerializeField] bool FinaleTrigger = false;
     [SerializeField] GameObject replacement;
     [SerializeField] GameObject old_camera;
-    [SerializeField] AudioSource final_banging;
+    [SerializeField] GameObject final_banging;
+    [SerializeField] GameObject final_monster;
     void Awake()
     {
         voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController>();
+        final_monster.SetActive(false);
     }
     void Update()
     {
@@ -142,18 +144,19 @@ public class Raycast : MonoBehaviour
             if (!FinaleTrigger)
             {
                 jumpscare.Pocetak_scene();
+                final_monster.SetActive(true);
                 FinaleTrigger = true;
             }
         }
         if (jumpscare.IsMad)
         {
-            Invoke("sound_breaking", 7);
+            Invoke("sound_breaking", 4);
         }
     }
     void sound_breaking()
     {
-        final_banging.Play();
-        Invoke("door_breaking", 5);
+        final_banging.SetActive(true);
+        Invoke("door_breaking", 4);
     }
     void door_breaking()
     {

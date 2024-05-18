@@ -40,14 +40,14 @@ public class Finalna_scena : MonoBehaviour
         Eerie.Play();
         Invoke("Screech_scene", 4);
     }
-    void Screech_scene()
+    public void Screech_scene()
     {
         kamera.SetActive(false);
         ScreechCamera.SetActive(true);
         Screech.Play();
         Invoke("Cutscene", 1);
     }
-    void Cutscene()
+    public void Cutscene()
     {
         CameraBreak.Play();
         FinalLightsOff.SetActive(false);
