@@ -10,14 +10,15 @@ public class Raycast : MonoBehaviour
     [SerializeField] public float maxDistance;
     public PhoneController voicebox;
     public GameObject light_notif;
+    public GameObject key_notif;
     public GameObject noise_notif;
     [SerializeField] private GameObject lightsOff;
     [SerializeField] AudioSource powerOut;
     public DoorControl door;
     public LightSwitch lampa;
+    [SerializeField] bool FirstPull = false;
     Mouse mouse = Mouse.current;
     [SerializeField] AudioSource bangingOnDoorAndBoom;
-    [SerializeField] bool HasDestroyed = false;
     int PhoneFlag = 0;
     [SerializeField] GameObject fake;
     [SerializeField] GameObject real;
@@ -60,7 +61,7 @@ public class Raycast : MonoBehaviour
                 }
                 
             }
-            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Untagged"))
+            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Flash"))
             {
                 fake.SetActive(false);
                 real.SetActive(true);
@@ -98,23 +99,11 @@ public class Raycast : MonoBehaviour
             {
                 if(lampa.LeverDown)
                 {
-                    if (HasDestroyed)
-                    {
-                        lampa.LeverUp.Play("lever_up", 0, 0.0f);
-                        lampa.LeverDown = false;
-                        lightsOff.SetActive(true);
-                    }
-                    else
-                    {
-                        lampa.LeverUp.Play("lever_up", 0, 0.0f);
-                        lampa.LeverDown = false;
-                        lightsOff.SetActive(true);
-                        bangingOnDoorAndBoom.Play();
-                        noise_notif.SetActive(true);
-                        fakeDoor.SetActive(false);
-                        brokenDoor.SetActive(true);
-                        HasDestroyed = true;
-                    }
+                     lampa.LeverUp.Play("lever_up", 0, 0.0f);
+                     lampa.LeverDown = false;
+                     lightsOff.SetActive(true);
+                     FirstPull = true;
+                     if (FirstPull) {key_notif.SetActive(true);}
                 }
                 else
                 {
@@ -129,6 +118,10 @@ public class Raycast : MonoBehaviour
             {
                 key.SetActive(false);
                 KeyCollected = true;
+                bangingOnDoorAndBoom.Play();
+                fakeDoor.SetActive(false);
+                brokenDoor.SetActive(true);
+                key_notif.SetActive(true);
             }
             if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("SecurityDoor") && KeyCollected)
             {

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4000012078362818}
   - component: {fileID: 33000012209065360}
   - component: {fileID: 23000010138162764}
+  - component: {fileID: 7633586308406959267}
   m_Layer: 0
   m_Name: chainlink_group-2_LOD1
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7633586308406959267
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011035562586}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.083335, y: 0.29837874, z: 2.0641284}
+  m_Center: {x: -0.0011298659, y: 0.0012827447, z: -0.02026183}
 --- !u!1 &1000012224519124
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +108,7 @@ GameObject:
   - component: {fileID: 4000011437529720}
   - component: {fileID: 33000011136198098}
   - component: {fileID: 23000011776181728}
+  - component: {fileID: 2414911878802420051}
   m_Layer: 0
   m_Name: chainlink_group-2_LOD0
   m_TagString: Untagged
@@ -166,6 +181,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2414911878802420051
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012224519124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.122082, y: 0.30094424, z: 2.104652}
+  m_Center: {x: -0.0000009536743, y: 0, z: 0}
 --- !u!1 &1000013870849648
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000011162724236}
   - component: {fileID: 205000013057076746}
+  - component: {fileID: 8536262448675021915}
   m_Layer: 0
   m_Name: chainlink_group-2
   m_TagString: Untagged
@@ -223,3 +252,16 @@ LODGroup:
     renderers:
     - renderer: {fileID: 23000010138162764}
   m_Enabled: 1
+--- !u!65 &8536262448675021915
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013870849648}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
