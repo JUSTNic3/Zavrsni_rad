@@ -44,7 +44,6 @@ public class Raycast : MonoBehaviour
         RaycastHit hit;
         Vector3 direction = Vector3.forward;
         Ray play = new Ray(transform.position, transform.TransformDirection(direction * maxDistance));
-        //Debug.DrawRay(transform.position, transform.TransformDirection(direction * maxDistance), Color.red);
 
         if (mouse.leftButton.wasPressedThisFrame)
         {
