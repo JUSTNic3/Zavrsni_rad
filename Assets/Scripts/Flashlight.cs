@@ -18,7 +18,6 @@ public class Flashlight : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.F) && IsOn == false)
         {
-            Debug.Log("Pressed");
             lightSource.SetActive(true);
             IsOn = true;
         }
