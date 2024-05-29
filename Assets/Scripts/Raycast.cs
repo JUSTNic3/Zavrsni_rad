@@ -8,6 +8,10 @@ public class Raycast : MonoBehaviour
 {
     //[SerializeField] public LayerMask layermask;
     [SerializeField] public float maxDistance;
+    [SerializeField] Animator Entrace_door;
+    [SerializeField] GameObject Entrance_Door;
+    [SerializeField] GameObject Entrance_Door_Locked;
+    private bool EntranceClosed = true;
     public PhoneController voicebox;
     public GameObject light_notif;
     public GameObject key_notif;
@@ -49,6 +53,19 @@ public class Raycast : MonoBehaviour
 
         if (mouse.leftButton.wasPressedThisFrame)
         {
+            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Entrance_door"))
+            {
+                if (EntranceClosed)
+                {
+                    Entrace_door.Play("entrance_door_open", 0, 0.0f);
+                    EntranceClosed = false;
+                }
+                else
+                {
+                    Entrace_door.Play("entrance_door_close", 0, 0.0f);
+                    EntranceClosed = true;
+                }
+            }
             if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Phone"))
             {
                 if(PhoneFlag == 0)
@@ -72,6 +89,8 @@ public class Raycast : MonoBehaviour
                 lightsOff.SetActive(false);
                 powerOut.Play();
                 RiggedPowerOut = true;
+                Entrance_Door.SetActive(false);
+                Entrance_Door_Locked.SetActive(true);
             }
             if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Door"))
             {

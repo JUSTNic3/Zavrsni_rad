@@ -15,6 +15,7 @@ TagManager:
   - Key
   - BreakDownDoor
   - Camera
+  - Entrance_door
   layers:
   - Default
   - TransparentFX
