@@ -11,9 +11,11 @@ public class Raycast : MonoBehaviour
     public PhoneController voicebox;
     public GameObject light_notif;
     public GameObject key_notif;
+    private bool key_notification = false;
     public GameObject noise_notif;
     [SerializeField] private GameObject lightsOff;
     [SerializeField] AudioSource powerOut;
+    [SerializeField] bool RiggedPowerOut = false;
     public DoorControl door;
     public LightSwitch lampa;
     [SerializeField] bool FirstPull = false;
@@ -69,6 +71,7 @@ public class Raycast : MonoBehaviour
                 light_notif.SetActive(true);
                 lightsOff.SetActive(false);
                 powerOut.Play();
+                RiggedPowerOut = true;
             }
             if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Door"))
             {
@@ -104,7 +107,10 @@ public class Raycast : MonoBehaviour
                      lampa.LeverDown = false;
                      lightsOff.SetActive(true);
                      FirstPull = true;
-                     if (FirstPull) {key_notif.SetActive(true);}
+                     if (FirstPull) {
+                        key_notif.SetActive(true);
+                        key_notification = true;
+                     }
                 }
                 else
                 {
@@ -115,14 +121,14 @@ public class Raycast : MonoBehaviour
                 }
                 
             }
-            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Key"))
+            if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("Key") && RiggedPowerOut && key_notification)
             {
                 key.SetActive(false);
                 KeyCollected = true;
                 bangingOnDoorAndBoom.Play();
                 fakeDoor.SetActive(false);
                 brokenDoor.SetActive(true);
-                key_notif.SetActive(true);
+                noise_notif.SetActive(true);
             }
             if (Physics.Raycast(play, out hit, maxDistance) && hit.transform.CompareTag("SecurityDoor") && KeyCollected)
             {
