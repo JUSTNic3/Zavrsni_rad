@@ -40,6 +40,7 @@ public class Raycast : MonoBehaviour
     [SerializeField] GameObject old_camera;
     [SerializeField] GameObject final_banging;
     [SerializeField] GameObject final_monster;
+    [SerializeField] Animator final_intro;
     void Awake()
     {
         voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController>();
@@ -191,6 +192,10 @@ public class Raycast : MonoBehaviour
             replacement.SetActive(true);
             old_camera.SetActive(false);
             DoorBrokenDown = true;
+            Invoke("finale_introduction",2);
         }
+    }
+    void finale_introduction(){
+        final_intro.Play("finale", 0, 0.0f);
     }
 }
