@@ -48,6 +48,7 @@ public class Raycast : MonoBehaviour
     }
     void Update()
     {
+        Cursor.visible = false;
         RaycastHit hit;
         Vector3 direction = Vector3.forward;
         Ray play = new Ray(transform.position, transform.TransformDirection(direction * maxDistance));
