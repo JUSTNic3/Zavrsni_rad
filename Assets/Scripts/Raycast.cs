@@ -41,10 +41,14 @@ public class Raycast : MonoBehaviour
     [SerializeField] GameObject final_banging;
     [SerializeField] GameObject final_monster;
     [SerializeField] Animator final_intro;
+    [SerializeField] AudioSource monster_screech;
+    [SerializeField] GameObject monster_eating_monster;
+    [SerializeField] Animator monster_showing;
     void Awake()
     {
         voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController>();
         final_monster.SetActive(false);
+        monster_eating_monster.SetActive(false);
     }
     void Update()
     {
@@ -198,5 +202,11 @@ public class Raycast : MonoBehaviour
     }
     void finale_introduction(){
         final_intro.Play("finale", 0, 0.0f);
+        monster_screech.Play();
+        Invoke("monster_eating_monster_animation", 2);
+    }
+    void monster_eating_monster_animation(){
+        monster_eating_monster.SetActive(true);
+        monster_showing.Play("monster_showing", 0, 0.0f);
     }
 }
