@@ -5,10 +5,9 @@ using System.Threading;
 
 public class Finalna_scena : MonoBehaviour
 {
-    [SerializeField] GameObject little_shits;
+    public GameObject little_shits;
     [SerializeField] GameObject fakeDoor;
     [SerializeField] GameObject realDoor;
-    //[SerializeField] BoxCollider scena_collider;
     [SerializeField] GameObject kamera;
     [SerializeField] GameObject ScreechCamera;
     [SerializeField] GameObject error;

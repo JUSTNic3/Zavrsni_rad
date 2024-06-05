@@ -42,13 +42,19 @@ public class Raycast : MonoBehaviour
     [SerializeField] GameObject final_monster;
     [SerializeField] Animator final_intro;
     [SerializeField] AudioSource monster_screech;
+    [SerializeField] AudioSource monster_dying;
     [SerializeField] GameObject monster_eating_monster;
+    [SerializeField] AudioSource monster_showing_eating;
     [SerializeField] Animator monster_showing;
+    [SerializeField] GameObject little_shit;
+    [SerializeField] GameObject LittleShitsBroken;
+    [SerializeField] GameObject last_hope_object;
     void Awake()
     {
         voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController>();
         final_monster.SetActive(false);
         monster_eating_monster.SetActive(false);
+        last_hope_object.SetActive(false);
     }
     void Update()
     {
@@ -207,6 +213,22 @@ public class Raycast : MonoBehaviour
     }
     void monster_eating_monster_animation(){
         monster_eating_monster.SetActive(true);
+        final_monster.SetActive(false);
+        monster_dying.Play();
+        monster_showing_eating.Play();
         monster_showing.Play("monster_showing", 0, 0.0f);
+        Invoke("monster_leaving", 6);
+    }
+    void monster_leaving(){
+        monster_showing.Play("Leaving", 0, 0.0f);
+        last_hope_object.SetActive(true);
+        Invoke("last_hope", 5);
+    }
+    void last_hope(){
+        replacement.SetActive(false);
+        old_camera.SetActive(true);
+        little_shit.SetActive(false);
+        jumpscare.little_shits.SetActive(false);
+        LittleShitsBroken.SetActive(true);
     }
 }
