@@ -49,12 +49,19 @@ public class Raycast : MonoBehaviour
     [SerializeField] GameObject little_shit;
     [SerializeField] GameObject LittleShitsBroken;
     [SerializeField] GameObject last_hope_object;
+    [SerializeField] GameObject FinalTrigger;
+    [SerializeField] Animator SlimeMonster;
+    [SerializeField] GameObject FinalCamera;
+    [SerializeField] Animator CameraAnimation;
+    [SerializeField] GameObject Player_capsule;
+
     void Awake()
     {
         voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController>();
         final_monster.SetActive(false);
         monster_eating_monster.SetActive(false);
         last_hope_object.SetActive(false);
+        FinalTrigger.SetActive(false);
     }
     void Update()
     {
@@ -175,7 +182,26 @@ public class Raycast : MonoBehaviour
                     door.SecurityDoorOpen = true;
                 }
             }
+            if (Physics.Raycast(play, out hit, 20) && hit.transform.CompareTag("SlimeMonster"))
+            {
+                SlimeMonster.Play("turning_around", 0, 0.0f);
+                old_camera.SetActive(false);
+                FinalCamera.SetActive(true);
+                Invoke("final_jumpscare", 6);
+            }
         }
+        if (Physics.Raycast(play, out hit, 20) && hit.transform.CompareTag("SlimeMonster"))
+            {
+                Player_capsule.SetActive(false);
+                SlimeMonster.Play("turning_around", 0, 0.0f);
+                old_camera.SetActive(false);
+                FinalCamera.SetActive(true);
+                Invoke("final_jumpscare", 6);
+            }
+        if (Physics.Raycast(play, out hit, 3) && hit.transform.CompareTag("PartOfMonster"))
+            {
+                FinalTrigger.SetActive(true);
+            }
         if (Physics.Raycast(play, out hit, 2) && hit.transform.CompareTag("Camera"))
         {
             if (!FinaleTrigger)
@@ -230,5 +256,9 @@ public class Raycast : MonoBehaviour
         little_shit.SetActive(false);
         jumpscare.little_shits.SetActive(false);
         LittleShitsBroken.SetActive(true);
+    }
+    void final_jumpscare(){
+        SlimeMonster.Play("final_jumpscare", 0, 0.0f);
+        CameraAnimation.Play("camera_moving_away", 0, 0.0f);
     }
 }

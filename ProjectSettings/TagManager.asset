@@ -16,6 +16,8 @@ TagManager:
   - BreakDownDoor
   - Camera
   - Entrance_door
+  - SlimeMonster
+  - PartOfMonster
   layers:
   - Default
   - TransparentFX
