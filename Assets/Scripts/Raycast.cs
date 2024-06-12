@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Threading;
+using UnityEngine.SceneManagement;
 
 public class Raycast : MonoBehaviour
 {
@@ -260,5 +261,10 @@ public class Raycast : MonoBehaviour
     void final_jumpscare(){
         SlimeMonster.Play("final_jumpscare", 0, 0.0f);
         CameraAnimation.Play("camera_moving_away", 0, 0.0f);
+        Invoke("theEnd", 12);
+    }
+    void theEnd(){
+        SceneManager.LoadScene(0);
+        Cursor.visible = true;
     }
 }
