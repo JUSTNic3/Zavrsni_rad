@@ -59,7 +59,7 @@ public class Raycast : MonoBehaviour
     [SerializeField] AudioSource monster_jumpscare;
 
     void Awake()
-    {
+    { 
         voicebox = GameObject.Find("MainCamera").GetComponent<PhoneController>();
         final_monster.SetActive(false);
         monster_eating_monster.SetActive(false);
@@ -209,8 +209,11 @@ public class Raycast : MonoBehaviour
         }
         if (jumpscare.IsMad)
         {
-            Invoke("sound_breaking", 4);
+            System.Random rnd = new System.Random();
+            float delay = rnd.Next(1, 20);
+            Invoke("sound_breaking", delay);
         }
+
     }
     void sound_breaking()
     {
@@ -258,7 +261,7 @@ public class Raycast : MonoBehaviour
         MonsterNoises.Stop();
         monster_jumpscare.Play();
         CameraAnimation.Play("camera_moving_away", 0, 0.0f);
-        Invoke("theEnd", 12);
+        Invoke("theEnd", 13);
     }
     void theEnd(){
         SceneManager.LoadScene(2);
