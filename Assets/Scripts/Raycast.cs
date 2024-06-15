@@ -55,6 +55,8 @@ public class Raycast : MonoBehaviour
     [SerializeField] GameObject FinalCamera;
     [SerializeField] Animator CameraAnimation;
     [SerializeField] GameObject Player_capsule;
+    [SerializeField] AudioSource MonsterNoises;
+    [SerializeField] AudioSource monster_jumpscare;
 
     void Awake()
     {
@@ -183,13 +185,6 @@ public class Raycast : MonoBehaviour
                     door.SecurityDoorOpen = true;
                 }
             }
-            if (Physics.Raycast(play, out hit, 20) && hit.transform.CompareTag("SlimeMonster"))
-            {
-                SlimeMonster.Play("turning_around", 0, 0.0f);
-                old_camera.SetActive(false);
-                FinalCamera.SetActive(true);
-                Invoke("final_jumpscare", 6);
-            }
         }
         if (Physics.Raycast(play, out hit, 20) && hit.transform.CompareTag("SlimeMonster"))
             {
@@ -260,11 +255,13 @@ public class Raycast : MonoBehaviour
     }
     void final_jumpscare(){
         SlimeMonster.Play("final_jumpscare", 0, 0.0f);
+        MonsterNoises.Stop();
+        monster_jumpscare.Play();
         CameraAnimation.Play("camera_moving_away", 0, 0.0f);
         Invoke("theEnd", 12);
     }
     void theEnd(){
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(2);
         Cursor.visible = true;
     }
 }
