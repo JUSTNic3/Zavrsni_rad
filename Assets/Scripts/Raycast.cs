@@ -209,9 +209,7 @@ public class Raycast : MonoBehaviour
         }
         if (jumpscare.IsMad)
         {
-            System.Random rnd = new System.Random();
-            float delay = rnd.Next(1, 20);
-            Invoke("sound_breaking", delay);
+            Invoke("sound_breaking", 7);
         }
 
     }
